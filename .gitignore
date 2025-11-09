@@ -190,6 +190,8 @@ cython_debug/
 # PyPI configuration file
 .pypirc".dvc/" 
 "*.pkl" 
-"data/raw/" 
+# Ignore raw data but not DVC tracking files
+data/raw/*
+!data/raw/*.dvc 
 "data/processed/" 
 "__pycache__/" 

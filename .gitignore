@@ -23,15 +23,15 @@ dist/
 .DS_Store
 
 # =========================================================
+# =========================================================
 # DVC & DATA HANDLING
 # =========================================================
-# Ignore everything inside data folder
-data/**
+# # Ignore everything inside data folder
+data
 
-# But keep DVC tracking files and folder structure
+# # But keep DVC tracking files and folder structure
 !data/**/*.dvc
 !data/.gitkeep
-
 # Ignore processed outputs
 models/
 visuals/

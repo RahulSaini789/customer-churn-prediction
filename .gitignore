@@ -25,8 +25,10 @@ dist/
 # =========================================================
 # DVC & DATA HANDLING
 # =========================================================
-# Ignore large data files, but track DVC metadata
+# Ignore everything inside data folder
 data/**
+
+# But keep DVC tracking files and folder structure
 !data/**/*.dvc
 !data/.gitkeep
 

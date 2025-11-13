@@ -1,32 +1,56 @@
+"""
+customer_churn_prediction.config
+--------------------------------
+
+Centralized configuration file for directory paths, constants, and project-level settings.
+
+This module defines standardized paths (for data, models, reports, etc.)
+so every script and notebook in the repository can import from a single place
+without hardcoding file locations.
+
+Example:
+    from customer_churn_prediction.config import PROCESSED_DIR, RANDOM_STATE
+
+Usage:
+    - Store all directory constants here.
+    - Avoid using absolute paths in scripts.
+    - Keep this file lightweight and environment-agnostic.
+"""
+
 from pathlib import Path
 
-from dotenv import load_dotenv
-from loguru import logger
+# Project root (auto-detects one level above this file)
+ROOT = Path(__file__).resolve().parents[1]
 
-# Load environment variables from .env file if it exists
-load_dotenv()
+# ========================
+# Directory Configuration
+# ========================
+DATA_DIR = ROOT / "data"
+RAW_DIR = DATA_DIR / "raw"
+INTERIM_DIR = DATA_DIR / "interim"
+PROCESSED_DIR = DATA_DIR / "processed"
 
-# Paths
-PROJ_ROOT = Path(__file__).resolve().parents[1]
-logger.info(f"PROJ_ROOT path is: {PROJ_ROOT}")
-
-DATA_DIR = PROJ_ROOT / "data"
-RAW_DATA_DIR = DATA_DIR / "raw"
-INTERIM_DATA_DIR = DATA_DIR / "interim"
-PROCESSED_DATA_DIR = DATA_DIR / "processed"
-EXTERNAL_DATA_DIR = DATA_DIR / "external"
-
-MODELS_DIR = PROJ_ROOT / "models"
-
-REPORTS_DIR = PROJ_ROOT / "reports"
+REPORTS_DIR = ROOT / "reports"
 FIGURES_DIR = REPORTS_DIR / "figures"
 
-# If tqdm is installed, configure loguru with tqdm.write
-# https://github.com/Delgan/loguru/issues/135
-try:
-    from tqdm import tqdm
+MODELS_DIR = ROOT / "models"
 
-    logger.remove(0)
-    logger.add(lambda msg: tqdm.write(msg, end=""), colorize=True)
-except ModuleNotFoundError:
-    pass
+# ========================
+# File Paths
+# ========================
+RAW_FILE = RAW_DIR / "telco_churn.csv"
+PROCESSED_FILE = PROCESSED_DIR / "telco_churn_cleaned.csv"
+
+# ========================
+# Global Constants
+# ========================
+RANDOM_STATE = 42
+TEST_SIZE = 0.2
+
+# ========================
+# Utility: Path Validation
+# ========================
+if __name__ == "__main__":
+    print(f"ROOT: {ROOT}")
+    print(f"RAW FILE EXISTS: {RAW_FILE.exists()}")
+    print(f"PROCESSED DIR: {PROCESSED_DIR}")
